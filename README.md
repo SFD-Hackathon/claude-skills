@@ -1,58 +1,57 @@
-Leave a star ⭐ if you like it 😘
+# Claude Code Skills
 
-# Codex Integration for Claude Code
+Common Claude Code skills for the SFD-Hackathon team.
 
-<img width="2288" height="808" alt="skillcodex" src="https://github.com/user-attachments/assets/85336a9f-4680-479e-b3fe-d6a68cadc051" />
+## Available Skills
 
+### Codex
 
-## Purpose
 Enable Claude Code to invoke the Codex CLI (`codex exec` and session resumes) for automated code analysis, refactoring, and editing workflows.
-
-## Prerequisites
-- `codex` CLI installed and available on `PATH`.
-- Codex configured with valid credentials and settings.
-- Confirm the installation by running `codex --version`; resolve any errors before using the skill.
 
 ## Installation
 
-Download this repo and store the skill in ~/.claude/skills/codex
+Install all skills to your local Claude Code:
 
+```bash
+git clone https://github.com/SFD-Hackathon/claude-skills.git /tmp/claude-skills && \
+mkdir -p ~/.claude/skills/codex && \
+cp /tmp/claude-skills/SKILL.md ~/.claude/skills/codex/ && \
+cp /tmp/claude-skills/README.md ~/.claude/skills/codex/ && \
+rm -rf /tmp/claude-skills
 ```
-git clone --depth 1 git@github.com:skills-directory/skill-codex.git /tmp/skills-temp && \
-mkdir -p ~/.claude/skills && \
-cp -r /tmp/skills-temp/ ~/.claude/skills/codex && \
-rm -rf /tmp/skills-temp
-```
+
+Or install manually:
+
+1. Clone this repository
+2. Copy the skill files to `~/.claude/skills/<skill-name>/`
+3. Restart Claude Code
+
+## Prerequisites for Codex Skill
+
+- `codex` CLI installed and available on `PATH`
+- Codex configured with valid credentials
+- Verify with `codex --version`
 
 ## Usage
 
-### Important: Thinking Tokens
-By default, this skill suppresses thinking tokens (stderr output) using `2>/dev/null` to avoid bloating Claude Code's context window. If you want to see the thinking tokens for debugging or insight into Codex's reasoning process, explicitly ask Claude to show them.
+Once installed, invoke the Codex skill in Claude Code:
 
-### Example Workflow
-
-**User prompt:**
 ```
-Use codex to analyze this repository and suggest improvements for my claude code skill.
+/codex
 ```
 
-**Claude Code response:**
-Claude will activate the Codex skill and:
-1. Ask which model to use (`gpt-5` or `gpt-5-codex`) unless already specified in your prompt.
-2. Ask which reasoning effort level (`low`, `medium`, or `high`) unless already specified in your prompt.
-3. Select appropriate sandbox mode (defaults to `read-only` for analysis)
-4. Run a command like:
-```bash
-codex exec -m gpt-5-codex \
-  --config model_reasoning_effort="high" \
-  --sandbox read-only \
-  --full-auto \
-  --skip-git-repo-check \
-  "Analyze this Claude Code skill repository comprehensively..." 2>/dev/null
+Or simply ask Claude to use Codex:
+
+```
+Use codex to analyze this repository and suggest improvements.
 ```
 
-**Result:**
-Claude will summarize the Codex analysis output, highlighting key suggestions and asking if you'd like to continue with follow-up actions.
+## Adding New Skills
 
-### Detailed Instructions
-See `SKILL.md` for complete operational instructions, CLI options, and workflow guidance.
+1. Create a new `SKILL.md` file following the format in existing skills
+2. Add documentation to this README
+3. Submit a PR
+
+## License
+
+MIT
