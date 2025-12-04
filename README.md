@@ -2,55 +2,87 @@
 
 Common Claude Code skills for the SFD-Hackathon team.
 
+## Quick Install (All Skills)
+
+```bash
+git clone https://github.com/SFD-Hackathon/claude-skills.git /tmp/claude-skills && \
+cp -r /tmp/claude-skills/skills/* ~/.claude/skills/ && \
+rm -rf /tmp/claude-skills
+```
+
 ## Available Skills
 
+| Skill | Description | Prerequisites |
+|-------|-------------|---------------|
+| [codex](skills/codex/) | Invoke OpenAI Codex CLI for code analysis and refactoring | `codex` CLI installed |
+
+## Install Individual Skills
+
 ### Codex
-
-Enable Claude Code to invoke the Codex CLI (`codex exec` and session resumes) for automated code analysis, refactoring, and editing workflows.
-
-## Installation
-
-Install all skills to your local Claude Code:
 
 ```bash
 git clone https://github.com/SFD-Hackathon/claude-skills.git /tmp/claude-skills && \
 mkdir -p ~/.claude/skills/codex && \
-cp /tmp/claude-skills/SKILL.md ~/.claude/skills/codex/ && \
-cp /tmp/claude-skills/README.md ~/.claude/skills/codex/ && \
+cp -r /tmp/claude-skills/skills/codex/* ~/.claude/skills/codex/ && \
 rm -rf /tmp/claude-skills
 ```
 
-Or install manually:
-
-1. Clone this repository
-2. Copy the skill files to `~/.claude/skills/<skill-name>/`
-3. Restart Claude Code
-
-## Prerequisites for Codex Skill
-
-- `codex` CLI installed and available on `PATH`
-- Codex configured with valid credentials
-- Verify with `codex --version`
-
 ## Usage
 
-Once installed, invoke the Codex skill in Claude Code:
+Once installed, invoke skills in Claude Code using:
 
+```
+/<skill-name>
+```
+
+For example:
 ```
 /codex
 ```
 
-Or simply ask Claude to use Codex:
-
+Or ask Claude directly:
 ```
-Use codex to analyze this repository and suggest improvements.
+Use codex to analyze this repository.
 ```
 
 ## Adding New Skills
 
-1. Create a new `SKILL.md` file following the format in existing skills
-2. Add documentation to this README
-3. Submit a PR
+1. Create a new directory under `skills/<skill-name>/`
+2. Add required files:
+   - `SKILL.md` - Skill instructions (required)
+   - `README.md` - Documentation (recommended)
+3. Update the "Available Skills" table in this README
+4. Submit a PR
+
+### Skill File Format
+
+`SKILL.md` should follow this format:
+
+```markdown
+---
+name: skill-name
+description: Brief description of when to use this skill
+---
+
+# Skill Name Guide
+
+## Instructions for Claude Code
+...
+```
+
+## Directory Structure
+
+```
+claude-skills/
+├── README.md
+└── skills/
+    ├── codex/
+    │   ├── SKILL.md
+    │   └── README.md
+    └── <new-skill>/
+        ├── SKILL.md
+        └── README.md
+```
 
 ## License
 
